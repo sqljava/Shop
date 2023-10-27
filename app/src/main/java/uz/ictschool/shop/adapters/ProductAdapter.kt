@@ -8,13 +8,16 @@ import coil.load
 import uz.ictschool.shop.databinding.ItemProductBinding
 import uz.ictschool.shop.model.Product
 
-class ProductAdapter(var list: List<Product>):RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
+class ProductAdapter(
+    var list: List<Product>,
+    val productClicked: ProductClicked):RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
     class ProductHolder(binding: ItemProductBinding):RecyclerView.ViewHolder(binding.root){
         var img = binding.imgProductItem
         var title = binding.titleProductItem
         var price = binding.priceProductItem
         var rating = binding.ratingProductItem
         var brand = binding.brandProductItem
+        var main = binding.mainProductItem
 
     }
 
@@ -38,6 +41,10 @@ class ProductAdapter(var list: List<Product>):RecyclerView.Adapter<ProductAdapte
         holder.rating.text = product.rating.toString()
 
         holder.img.load(product.images[0])
+
+        holder.main.setOnClickListener {
+            productClicked.onClicked(product)
+        }
 
     }
 

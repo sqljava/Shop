@@ -33,8 +33,6 @@ class CategoryAdapter(
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
 
-        //var thisCategory = categories[position]
-
         if (position == 0){
             holder.categoryText.text = "All"
         }else{
@@ -61,9 +59,7 @@ class CategoryAdapter(
                     categoryClicked.onClicked(categories[position-1])
                 }
             }
-
         }
-
     }
 
     interface CategoryClicked{

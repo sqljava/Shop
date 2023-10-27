@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="16dp"
+    android:id="@+id/main_product_item">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -60,39 +61,40 @@
 
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabCustomSize="40dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="4dp"
-            app:elevation="0dp"
-            android:backgroundTint="@color/orange"
-            app:tint="@color/white"
-            android:id="@+id/product_item_cart_fab"
-            android:src="@drawable/cart_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:fabCustomSize="40dp"-->
+<!--            android:layout_marginBottom="4dp"-->
+<!--            android:layout_marginEnd="4dp"-->
+<!--            app:elevation="0dp"-->
+<!--            android:backgroundTint="@color/orange"-->
+<!--            app:tint="@color/white"-->
+<!--            android:id="@+id/product_item_cart_fab"-->
+<!--            android:src="@drawable/cart_icon"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent" />-->
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:layout_constraintStart_toStartOf="@+id/brand_product_item"
-            app:layout_constraintTop_toBottomOf="@+id/brand_product_item"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rating_product_item"
             app:srcCompat="@drawable/star_icon" />
 
         <TextView
             android:id="@+id/rating_product_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginEnd="10dp"
             android:text="4.5"
             android:textColor="#7B7C7B"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView" />
 
 

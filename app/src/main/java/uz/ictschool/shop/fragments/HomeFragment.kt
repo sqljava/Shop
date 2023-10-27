@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import uz.ictschool.shop.R
 import uz.ictschool.shop.adapters.CategoryAdapter
 import uz.ictschool.shop.adapters.ProductAdapter
 import uz.ictschool.shop.api.APIClient
@@ -98,7 +100,18 @@ class HomeFragment : Fragment() {
             override fun onResponse(call: Call<ProductData>, response: Response<ProductData>) {
                 var products = response.body()!!.products
                 allProducts = products
-                binding.recProductsHome.adapter = ProductAdapter(products)
+                binding.recProductsHome.adapter = ProductAdapter(products,
+                    object :ProductAdapter.ProductClicked{
+                        override fun onClicked(product: Product) {
+                            val bundle = Bundle()
+                            bundle.putSerializable("product", product)
+
+                            findNavController().navigate(R.id
+                                .action_homeFragment_to_productInfoFragment,
+                                bundle)
+                        }
+
+                    })
                 Log.d("TAG", "onResponse: $products")
             }
 
@@ -109,7 +122,18 @@ class HomeFragment : Fragment() {
     }
 
     fun changeProductAdapter(products: List<Product>){
-        binding.recProductsHome.adapter = ProductAdapter(products)
+        binding.recProductsHome.adapter = ProductAdapter(products,
+            object : ProductAdapter.ProductClicked{
+                override fun onClicked(product: Product) {
+                    val bundle = Bundle()
+                    bundle.putSerializable("product", product)
+
+                    findNavController().navigate(R.id
+                        .action_homeFragment_to_productInfoFragment,
+                        bundle)
+                }
+
+            })
     }
 
     companion object {

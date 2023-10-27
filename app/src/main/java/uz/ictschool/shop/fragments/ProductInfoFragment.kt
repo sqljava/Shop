@@ -1,11 +1,15 @@
 package uz.ictschool.shop.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import uz.ictschool.shop.R
+import uz.ictschool.shop.SharedPrefHelper
+import uz.ictschool.shop.adapters.ImageAdapter
 import uz.ictschool.shop.databinding.FragmentProductInfoBinding
 import uz.ictschool.shop.model.Product
 
@@ -25,11 +29,42 @@ class ProductInfoFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProductInfoBinding.inflate(inflater, container, false)
+
+        binding.productScreenBack.setOnClickListener {
+            findNavController().navigate(R.id.action_productInfoFragment_to_homeFragment)
+        }
+
+
+        binding.titleProductInfo.text = product.title
+        binding.brandProductInfo.text = product.brand
+        binding.priceProductInfo.text = product.price.toString() + " $"
+        binding.descriptionProductInfo.text = product.description
+        binding.ratingProductInfo.text = product.rating.toString()
+
+
+        binding.productViewpager.adapter = ImageAdapter(product.images,
+            binding.productViewpager, binding.productInfoMain)
+
+
+        binding.btnAddProductInfo.setOnClickListener {
+
+            val shared = SharedPrefHelper.getInstance(requireContext())
+            val bundle = Bundle()
+            bundle.putSerializable("product", product)
+            //bundle.putInt("quantity", quantity)
+            if (shared.getUser() == null){
+                findNavController().navigate(R.id.action_productInfoFragment_to_loginFragment, bundle)
+            }else{
+                //findNavController().navigate(R.id.action_productFragment_to_cartFragment, bundle)
+            }
+
+        }
 
 
 
@@ -37,22 +72,4 @@ class ProductInfoFragment : Fragment() {
         return binding.root
     }
 
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment ProductInfoFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String) =
-//            ProductInfoFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                }
-//            }
-//    }
 }
