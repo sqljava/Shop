@@ -57,11 +57,10 @@ class ProductInfoFragment : Fragment() {
             val shared = SharedPrefHelper.getInstance(requireContext())
             val bundle = Bundle()
             bundle.putSerializable("product", product)
-            //bundle.putInt("quantity", quantity)
             if (shared.getUser() == null){
                 findNavController().navigate(R.id.action_productInfoFragment_to_loginFragment, bundle)
             }else{
-                //findNavController().navigate(R.id.action_productFragment_to_cartFragment, bundle)
+                findNavController().navigate(R.id.action_productInfoFragment_to_cartFragment, bundle)
             }
 
         }
